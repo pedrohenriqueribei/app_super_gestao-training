@@ -1,4 +1,4 @@
-@extends('site.layouts.basico');
+@extends('site.layouts.basico')
 
 @section('titulo','Sobre-nos')
 @section ('conteudo')

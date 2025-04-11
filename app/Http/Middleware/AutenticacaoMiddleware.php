@@ -13,15 +13,16 @@ class AutenticacaoMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        //verificar se usuário possui acesso a rota
-        if(true){
+        //
+        session_start();
+
+        if(isset($_SESSION['email']) && $_SESSION['email'] != '') {
             return $next($request);
+        } else {
+            return redirect()->route('site.login', [ 'erro' => 2]);
         }
-        //caso o usuário não seja autenticado
-        else {
-            return Response("Acesso negado!! Faça login");
-        }
+
     }
 }

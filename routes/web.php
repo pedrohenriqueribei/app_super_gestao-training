@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreNosController;
 use App\Http\Middleware\LogAcessoMiddleware;
@@ -18,8 +19,9 @@ Route::get('/sobre-nos', [SobreNosController::class,'main'])->name('site.sobre-n
 //aula 68
 Route::post('/contato', [\App\Http\Controllers\ContatoController::class,'salvar'])->name('site.contato');
 
-//aula 37
-Route::get('/login', function(){return 'Login';})->name('site.login');
+//aula 37             MOD 11
+Route::get('/login/{erro?}', [LoginController::class, 'index'])->name('site.login');
+Route::post('/login', [LoginController::class, 'autenticar'])->name('site.login'); //aula 147
 
 //aula 38
 Route::middleware('log.acesso','autenticacao')
