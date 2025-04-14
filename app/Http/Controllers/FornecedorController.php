@@ -9,15 +9,20 @@ class FornecedorController extends Controller
     public function index(){
 
         //aula 152
-        return view('app.fornecedor');
+        return view('app.fornecedor.index');
+    }
 
+    //aula 154
+    public function adicionar() {
+        return view('app.fornecedor.adicionar');
+    }
 
-
-
-
-
-
-        //$fornecedores = ['Fornecedor 1', 'Fornecedor 2', 'Fornecedor 3', 'Fornecedor 4', 'Fornecedor 5', 'Fornecedor 6', 'Fornecedor 7', 'Fornecedor 11', 'Fornecedor 8', 'Fornecedor 9', 'Fornecedor 10'];
+    //aula 154
+    public function listar() {
+        return view('app.fornecedor.listar');
+    }
+}
+//$fornecedores = ['Fornecedor 1', 'Fornecedor 2', 'Fornecedor 3', 'Fornecedor 4', 'Fornecedor 5', 'Fornecedor 6', 'Fornecedor 7', 'Fornecedor 11', 'Fornecedor 8', 'Fornecedor 9', 'Fornecedor 10'];
         //$fornecedores = [];
 
         //aula 48
@@ -47,5 +52,3 @@ class FornecedorController extends Controller
         ];
         return view('app.fornecedor.index', compact('fornecedores'));
         */
-    }
-}
