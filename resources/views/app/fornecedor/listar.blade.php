@@ -45,6 +45,8 @@
                     </tbody>
                 </table>
                 
+                <!--aula 158 - paginação -->
+                {{ $fornecedores->appends($request)->links() }}
             </div>
             
             
