@@ -15,30 +15,55 @@ class FornecedorController extends Controller
 
     //aula 155
     public function adicionar(Request $request) {
-        if($request->input('_token') != ''){
-            //validação
-            $regras = [
-                'nome' => 'required|min:3|max:40',
-                'site' => 'required',
-                'uf'   => 'required|min:2|max:2',
-                'email'=> 'email'
-            ];
 
-            $feedbacks = [
-                'required' => ':attribute deve ser preechido',
-                'nome.min' => ' :attribute deve ter no mínimo 3 caracteres',
-                'nome.max' => ' :attribute deve ter no máximo 40 caracteres',
-                'uf.min'   => ' UF deve ter no mínimo 2 caracteres',
-                'uf.max'   => ' UF deve ter no máximo 2 caracteres',
-                'email'    => ' :attribute não foi preenchido corretamente'
-            ];
+        $msg = '';
+
+        //validação
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'site' => 'required',
+            'uf'   => 'required|min:2|max:2',
+            'email'=> 'email'
+        ];
+
+        $feedbacks = [
+            'required' => ':attribute deve ser preechido',
+            'nome.min' => ' :attribute deve ter no mínimo 3 caracteres',
+            'nome.max' => ' :attribute deve ter no máximo 40 caracteres',
+            'uf.min'   => ' UF deve ter no mínimo 2 caracteres',
+            'uf.max'   => ' UF deve ter no máximo 2 caracteres',
+            'email'    => ' :attribute não foi preenchido corretamente'
+        ];
+
+        //inclusão de novo registro
+        if($request->input('_token') != '' && $request->input('id') == ''){
+            
 
             $request->validate($regras, $feedbacks);
 
             $fornecedor = new Fornecedor();
             $fornecedor->create($request->all());
+
+            $msg = "Cadastro realizado com sucesso!!!";
         }
-        return view('app.fornecedor.adicionar');
+
+        //edição de registro
+        if($request->input('_token') != '' && $request->input('id') != ''){
+            $request->validate($regras, $feedbacks);
+            $fornecedor = Fornecedor::find($request->input('id'));
+            $update = $fornecedor->update($request->all());
+
+            if($update){
+                $msg = "Update realizado com sucesso!!!";
+            }
+            else {
+                $msg = "Update apresentou erro!";
+            }
+
+            return redirect()->route('app.fornecedor.editar', ['id' => $request->input('id'), 'msg' => $msg]);
+        }
+
+        return view('app.fornecedor.adicionar', ['msg' => $msg]);
     }
 
     //aula 154
@@ -51,6 +76,16 @@ class FornecedorController extends Controller
             ->get();
 
         return view('app.fornecedor.listar', ['fornecedores' => $fornecedores]);
+    }
+
+    //aula 157
+    public function editar($id, $msg = '') {
+        
+        $fornecedor = Fornecedor::find($id);
+
+        //dd($fornecedor);
+
+        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'msg' => $msg]);
     }
 }
 //$fornecedores = ['Fornecedor 1', 'Fornecedor 2', 'Fornecedor 3', 'Fornecedor 4', 'Fornecedor 5', 'Fornecedor 6', 'Fornecedor 7', 'Fornecedor 11', 'Fornecedor 8', 'Fornecedor 9', 'Fornecedor 10'];
