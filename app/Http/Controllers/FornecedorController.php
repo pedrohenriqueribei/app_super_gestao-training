@@ -42,8 +42,15 @@ class FornecedorController extends Controller
     }
 
     //aula 154
-    public function listar() {
-        return view('app.fornecedor.listar');
+    public function listar(Request $request) {
+
+        $fornecedores = Fornecedor::where('nome', 'like', '%'.$request->input('nome').'%')
+            ->where('site', 'like', '%'.$request->input('site').'%')
+            ->where('uf', 'like', '%'.$request->input('uf').'%')
+            ->where('email', 'like', '%'.$request->input('email').'%')
+            ->get();
+
+        return view('app.fornecedor.listar', ['fornecedores' => $fornecedores]);
     }
 }
 //$fornecedores = ['Fornecedor 1', 'Fornecedor 2', 'Fornecedor 3', 'Fornecedor 4', 'Fornecedor 5', 'Fornecedor 6', 'Fornecedor 7', 'Fornecedor 11', 'Fornecedor 8', 'Fornecedor 9', 'Fornecedor 10'];
