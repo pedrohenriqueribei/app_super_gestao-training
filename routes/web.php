@@ -31,7 +31,7 @@ Route::middleware('log.acesso','autenticacao')
     ->prefix('/app')->group(function(){
     
         Route::get('/cliente', [ClienteController::class, 'index'])->name('app.cliente');
-        Route::get('/produto', [ProdutoController::class, 'index'])->name('app.produto');
+        
     
         //aula 45
         Route::get('/fornecedor', [\App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedor');
@@ -46,6 +46,10 @@ Route::middleware('log.acesso','autenticacao')
         //aula 152
         Route::get('/home', [HomeController::class, 'index'])->name('app.home');
         Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
+
+        //produtos
+        Route::resource('/produto', ProdutoController::class); //aula 161
+        //Route::get('/produto', [ProdutoController::class, 'index'])->name('app.produto');
 });
 
 
