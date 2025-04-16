@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fornecedor extends Model
 {
+    use SoftDeletes;
+    
     // determinar o nome da tabela
     protected $table = 'fornecedores';
 

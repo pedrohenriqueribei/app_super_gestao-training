@@ -41,6 +41,7 @@ Route::middleware('log.acesso','autenticacao')
         Route::get('/fornecedor/adicionar', [\App\Http\Controllers\FornecedorController::class, 'adicionar'])->name('app.fornecedor.adicionar');
         Route::post('/fornecedor/adicionar', [\App\Http\Controllers\FornecedorController::class, 'adicionar'])->name('app.fornecedor.adicionar');
         Route::get('/fornecedor/editar/{id}/{msg?}', [\App\Http\Controllers\FornecedorController::class, 'editar'])->name('app.fornecedor.editar');  //aula 157
+        Route::get('/fornecedor/excluir/{id}/{msg?}', [\App\Http\Controllers\FornecedorController::class, 'excluir'])->name('app.fornecedor.excluir'); //aula 160
 
         //aula 152
         Route::get('/home', [HomeController::class, 'index'])->name('app.home');
