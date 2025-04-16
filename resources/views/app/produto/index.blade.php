@@ -12,7 +12,7 @@
         <div class="menu">
 
             <ul>
-                <li><a href="">Novo</a></li>
+                <li><a href="{{ route('produto.create') }}">Novo</a></li>
                 <li><a href="">Consultar</a></li>
             </ul>
 
@@ -40,7 +40,7 @@
                                 <td>{{ $produto->unidade_id }}</td>
                                 <td><a href="">Editar</a></td>
                                 <td><a href="">Excluir</a></td>
-                                
+                                             
                             </tr>
                         @endforeach
                     </tbody>
