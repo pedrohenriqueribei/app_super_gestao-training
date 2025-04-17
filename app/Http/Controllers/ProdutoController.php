@@ -50,7 +50,7 @@ class ProdutoController extends Controller
         ];
 
         $request->validate($regras, $feedbacks);
-        
+
         //aula 166
         Produto::create($request->all());
         return redirect()->route('produto.index');
@@ -61,7 +61,8 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        //
+        //aula 168
+        return view('app.produto.show', ['produto' => $produto]);
     }
 
     /**
