@@ -38,7 +38,7 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         //aula 164
-        $produtos = Produto::paginate(10);
+        $produtos = Produto::paginate(15);
         
         return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all()]);
     }

@@ -11,4 +11,14 @@ class Produto extends Model
     //use SoftDeletes;
 
     protected $fillable = ['nome', 'descricao', 'peso', 'unidade_id'];
+
+    //aula 179
+    public function produtoDetalhe() {
+        return $this->hasOne('App\Models\ProdutoDetalhe');
+    }
+
+    //aula 180
+    public function unidade() {
+        return $this->hasOne('App\Models\Unidade');
+    }
 }
