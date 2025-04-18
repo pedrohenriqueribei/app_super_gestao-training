@@ -21,7 +21,7 @@
 
             <ul>
                 <li><a href="{{ route('produto.index') }}">Voltar</a></li>
-                <li><a href="{{ route('produto.create') }}">Novo</a></li>
+                <li><a href="{{ route('produto.form') }}">Novo</a></li>
             </ul>
 
         </div>
@@ -59,7 +59,7 @@
                     </select>
                     <span style="color: red;">{{ $errors->has('unidade_id') ? $errors->first('unidade_id') : '' }}</span>
 
-                    <button type="submit" class="borda-branca">{{ isset($produto->id) ? 'Atualizar' : 'Adicionar' }}</button>
+                    <button type="submit" class="borda-branca">Adicionar</button>
                 </form>
             </div>
         </div>
