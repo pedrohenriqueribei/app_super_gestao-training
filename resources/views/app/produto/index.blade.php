@@ -13,7 +13,7 @@
 
             <ul>
                 <li><a href="{{ route('produto.create') }}">Novo</a></li>
-                <li><a href="">Consultar</a></li>
+                <li><a href="{{ route('produto.index') }}">Consultar</a></li>
             </ul>
 
         </div>
@@ -39,9 +39,9 @@
                                 <td>{{ $produto->descricao }}</td>
                                 <td>{{ $produto->peso }}</td>
                                 <td>{{ $produto->unidade_id }}</td>
-                                <td><a href="{{ route('produto.show',['produto' => $produto->id]) }}">Abrir</a></td>
-                                <td><a href="">Editar</a></td>
-                                <td><a href="">Excluir</a></td>
+                                <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Abrir</a></td>
+                                <td><a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Editar</a></td>
+                                <td><a href="{{ route('produto.destroy', ['produto' => $produto->id]) }}">Excluir</a></td>
                                              
                             </tr>
                         @endforeach

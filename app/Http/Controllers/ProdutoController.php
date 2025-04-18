@@ -5,9 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\Produto;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
+use PHPUnit\TextUI\Configuration\Constant;
 
 class ProdutoController extends Controller
 {
+
+    //aula 167
+    public function regras(){
+        return  [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:2000',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id'
+        ];
+    } 
+
+    
+
+    public function feedbacks(){
+        return [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'min' => 'O campo :attribute deve ter no mínimo 3 caracteres',
+            'max' => 'O campo :attribute ultrapassou a quantidade máxima de caracteres',
+            'peso.integer' => 'O campo :attribute deve ser um número inteiro',
+            'unidade_id.exists' => 'A unidade de medida informada não existe'
+        ];
+    } 
+
     /**
      * Display a listing of the resource.
      */
@@ -34,22 +58,9 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //aula 167
-        $regras = ['nome' => 'required|min:3|max:40',
-                    'descricao' => 'required|min:3|max:2000',
-                    'peso' => 'required|integer',
-                    'unidade_id' => 'exists:unidades,id'
-                ];
+        
 
-        $feedbacks = [
-            'required' => 'O campo :attribute deve ser preenchido',
-            'min' => 'O campo :attribute deve ter no mínimo 3 caracteres',
-            'max' => 'O campo :attribute ultrapassou a quantidade máxima de caracteres',
-            'peso.integer' => 'O campo :attribute deve ser um número inteiro',
-            'unidade_id.exists' => 'A unidade de medida informada não existe'
-        ];
-
-        $request->validate($regras, $feedbacks);
+        $request->validate($this->regras(), $this->feedbacks());
 
         //aula 166
         Produto::create($request->all());
@@ -70,7 +81,9 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        //
+        //aula 169
+        $unidades = Unidade::all();
+        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
     }
 
     /**
@@ -78,7 +91,16 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        //AULA 170
+        //$request->all(); //payload (com dados atualizados)
+        
+        //$produto->getAttributes(); //instância do objeto no estado anterior (do banco)
+
+        $request->validate($this->regras(), $this->feedbacks());
+        
+        $produto->update($request->all()); // dar update em produto com os dados atualizados da requisição
+
+        return redirect()->route('produto.show', ['produto' => $produto]);
     }
 
     /**
@@ -87,6 +109,7 @@ class ProdutoController extends Controller
     public function destroy(Produto $produto)
     {
         //
+        return view('app.produto.destroy', ['produto' => $produto]);
         
     }
 }
