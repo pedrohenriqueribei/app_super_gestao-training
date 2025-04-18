@@ -83,7 +83,9 @@ class ProdutoController extends Controller
     {
         //aula 169
         $unidades = Unidade::all();
-        return view('app.produto.create', ['produto' => $produto, 'unidades' => $unidades]);
+        //return view('app.produto.create', ['produto' => $produto, 'unidades' => $unidades]);
+        //aula 173
+        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
     }
 
     /**
