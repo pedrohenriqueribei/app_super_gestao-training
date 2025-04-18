@@ -97,7 +97,7 @@ class ProdutoController extends Controller
         //$produto->getAttributes(); //instância do objeto no estado anterior (do banco)
 
         $request->validate($this->regras(), $this->feedbacks());
-        
+
         $produto->update($request->all()); // dar update em produto com os dados atualizados da requisição
 
         return redirect()->route('produto.show', ['produto' => $produto]);
@@ -108,8 +108,8 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
-        return view('app.produto.destroy', ['produto' => $produto]);
+        $produto->delete();
+        return redirect()->route('produto.index');
         
     }
 }
