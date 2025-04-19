@@ -14,7 +14,7 @@ class Produto extends Model
 
     //aula 179
     public function produtoDetalhe() {
-        return $this->hasOne('App\Models\ProdutoDetalhe');
+        return $this->hasOne(ProdutoDetalhe::class);
     }
 
     //aula 180
