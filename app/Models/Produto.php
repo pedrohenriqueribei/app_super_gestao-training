@@ -27,7 +27,7 @@ class Produto extends Model
         return $this->belongsTo(Fornecedor::class);
     }
 
-    //aula 188 - formatar a exibição das informações de produtos
+    //aula 187 - formatar a exibição das informações de produtos
     public function formatarNomeComId(): string {
         return "{$this->id} - {$this->nome}";
     }
