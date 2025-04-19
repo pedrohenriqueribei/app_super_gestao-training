@@ -19,6 +19,7 @@ class Produto extends Model
 
     //aula 180
     public function unidade() {
-        return $this->hasOne('App\Models\Unidade');
+        return $this->belongsTo (Unidade::class);
     }
+    
 }
