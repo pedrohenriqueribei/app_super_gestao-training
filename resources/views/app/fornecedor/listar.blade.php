@@ -27,6 +27,7 @@
                             <th>Site</th>
                             <th>UF</th>
                             <th>E-mail</th>
+                            <th>Produtos</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -38,6 +39,13 @@
                                 <td>{{ $fornecedor->site }}</td>
                                 <td>{{ $fornecedor->uf }}</td>
                                 <td>{{ $fornecedor->email }}</td>
+                                <td>
+                                    
+                                    @foreach($fornecedor->produtos as $produto)
+                                        <p>{{ $produto->formatarNomeComId() }}</p>
+                                    @endforeach
+                                    
+                                </td>
                                 <td><a href="{{ route('app.fornecedor.editar', $fornecedor->id)}}">Editar</a></td>
                                 <td><a href="{{ route('app.fornecedor.excluir', $fornecedor->id)}}">Excluir</a></td>
                             </tr>

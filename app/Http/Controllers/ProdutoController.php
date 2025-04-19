@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
-use App\Models\ProdutoDetalhe;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
-use PHPUnit\TextUI\Configuration\Constant;
 
 class ProdutoController extends Controller
 {
@@ -39,7 +37,7 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         //aula 164
-        $produtos = Produto::with(['ProdutoDetalhe'])->paginate(15);
+        $produtos = Produto::with(['produtoDetalhe', 'fornecedor'])->paginate(15);
         
         return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all()]);
     }

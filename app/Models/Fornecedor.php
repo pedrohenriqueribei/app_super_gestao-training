@@ -14,5 +14,9 @@ class Fornecedor extends Model
 
     protected $fillable = ['nome', 'site', 'uf', 'email'];
 
-    
+    //aula 187
+    public function produtos() {
+        return $this->hasMany(Produto::class, 'fornecedor_id', 'id');
+        //return $this->hasMany(Produto::class); convenções de nomenclatura do Laravel, você pode simplificar:
+    }
 }
