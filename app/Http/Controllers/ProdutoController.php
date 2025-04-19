@@ -2,34 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fornecedor;
 use App\Models\Produto;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
-
-    //aula 167
-    public function regras(){
-        return  [
-            'nome' => 'required|min:3|max:40',
-            'descricao' => 'required|min:3|max:2000',
-            'peso' => 'required|integer',
-            'unidade_id' => 'exists:unidades,id'
-        ];
-    } 
-
-    
-
-    public function feedbacks(){
-        return [
-            'required' => 'O campo :attribute deve ser preenchido',
-            'min' => 'O campo :attribute deve ter no mínimo 3 caracteres',
-            'max' => 'O campo :attribute ultrapassou a quantidade máxima de caracteres',
-            'peso.integer' => 'O campo :attribute deve ser um número inteiro',
-            'unidade_id.exists' => 'A unidade de medida informada não existe'
-        ];
-    } 
 
     /**
      * Display a listing of the resource.
@@ -49,7 +28,11 @@ class ProdutoController extends Controller
     {
         // aula 165
         $unidades = Unidade::all();
-        return view('app.produto.create', ['unidades' => $unidades]);
+
+        //aula 188
+        $fornecedores = Fornecedor::all();
+
+        return view('app.produto.create', ['unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -82,9 +65,13 @@ class ProdutoController extends Controller
     {
         //aula 169
         $unidades = Unidade::all();
+
+        //aula 188
+        $fornecedores = Fornecedor::all();
+
         //return view('app.produto.create', ['produto' => $produto, 'unidades' => $unidades]);
         //aula 173
-        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
+        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -113,4 +100,28 @@ class ProdutoController extends Controller
         return redirect()->route('produto.index');
         
     }
+
+    //aula 167
+    public function regras(){
+        return  [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:2000',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id',
+            'fornecedor_id' => 'exists:fornecedores,id'
+        ];
+    } 
+
+    
+
+    public function feedbacks(){
+        return [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'min' => 'O campo :attribute deve ter no mínimo 3 caracteres',
+            'max' => 'O campo :attribute ultrapassou a quantidade máxima de caracteres',
+            'peso.integer' => 'O campo :attribute deve ser um número inteiro',
+            'unidade_id.exists' => 'A unidade de medida informada não existe',
+            'fornecedor_id.exists' => 'Um fornecedor deve ser escolhido'
+        ];
+    } 
 }

@@ -22,7 +22,7 @@
             <div style="width:30%; margin-left: auto; margin-right: auto;">
                 <p style='color: rgb(33, 212, 33)'></p>{{ $msg ?? ''}} </p>
                 
-                @component('app.produto._components.form_create_edit', ['produto' => $produto, 'unidades' => $unidades])
+                @component('app.produto._components.form_create_edit', ['produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores])
                 @endcomponent
             </div>
         </div>
