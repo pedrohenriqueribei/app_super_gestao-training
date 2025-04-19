@@ -10,7 +10,7 @@ class Produto extends Model
     //
     //use SoftDeletes;
 
-    protected $fillable = ['nome', 'descricao', 'peso', 'unidade_id'];
+    protected $fillable = ['nome', 'descricao', 'peso', 'unidade_id', 'fornecedor_id'];
 
     //aula 179
     public function produtoDetalhe() {
@@ -20,6 +20,11 @@ class Produto extends Model
     //aula 180
     public function unidade() {
         return $this->belongsTo (Unidade::class);
+    }
+
+    //aula 185
+    public function fornecedor() {
+        return $this->belongsTo(Fornecedor::class);
     }
     
 }
