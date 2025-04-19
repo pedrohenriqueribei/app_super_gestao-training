@@ -4,11 +4,14 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PedidoProdutoController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutoDetalheController;
 use App\Http\Controllers\SobreNosController;
 use App\Http\Middleware\LogAcessoMiddleware;
+use App\Models\Cliente;
 use Illuminate\Support\Facades\Route;
 
     // aula 138                               
@@ -31,9 +34,6 @@ Route::post('/login', [LoginController::class, 'autenticar'])->name('site.login'
 Route::middleware('log.acesso','autenticacao')
     ->prefix('/app')->group(function(){
     
-        Route::get('/cliente', [ClienteController::class, 'index'])->name('app.cliente');
-        
-    
         //aula 45
         Route::get('/fornecedor', [\App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedor');
         //aula 154
@@ -54,7 +54,13 @@ Route::middleware('log.acesso','autenticacao')
 
         //produtos detalhes - aula 175
         Route::resource('produto-detalhe', ProdutoDetalheController::class);
-});
+
+        // aula 190
+        Route::resource('cliente', ClienteController::class);
+        Route::resource('pedido', PedidoController::class);
+        Route::resource('pedido-produto', PedidoProdutoController::class);
+    }
+);
 
 
 
