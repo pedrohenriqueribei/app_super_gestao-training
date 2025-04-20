@@ -31,5 +31,10 @@ class Produto extends Model
     public function formatarNomeComId(): string {
         return "{$this->id} - {$this->nome}";
     }
+
+    //aula 197 - relacionamento de produto com pedidos
+    public function pedidos() {
+        return $this->belongsToMany(Pedido::class, 'pedidos_produtos');
+    }
     
 }

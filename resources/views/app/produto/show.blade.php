@@ -13,7 +13,6 @@
 
             <ul>
                 <li><a href="{{ route('produto.index') }}">Voltar</a></li>
-                <li><a href="">Consultar</a></li>
             </ul>
 
         </div>
@@ -38,7 +37,15 @@
                         <th>Unidade de medida</th>
                         <td>{{ $produto->unidade_id }}</td>
                     </tr>
-
+                    <tr>
+                        <th>Pedidos relacionados</th>
+                        <td>
+                            @foreach ($produto->pedidos as $pedido)
+                                <p>ID {{ $pedido->id }} - Cliente: {{ $pedido->cliente->nome }} - Data: {{$pedido->getCreatedAtFormatadoAttribute() }} </p>
+                                <hr>
+                            @endforeach
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
