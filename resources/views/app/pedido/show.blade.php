@@ -1,18 +1,18 @@
 @extends('app.layouts.basico')
 
-@section('titulo', 'Cliente ')
+@section('titulo', 'Pedido ')
 
 @section('conteudo')
 
     <div class="conteudo-pagina">
         <div class="titulo-pagina-2">
-            <p>{{ $cliente->nome }}</p>
+            <p>Pedido de {{ $pedido->cliente->nome }}</p>
         </div>
 
         <div class="menu">
 
             <ul>
-                <li><a href="{{ route('cliente.index') }}">Voltar</a></li>
+                <li><a href="{{ route('pedido.index') }}">Voltar</a></li>
             </ul>
 
         </div>
@@ -23,21 +23,14 @@
                 <table border="1">
                     <tr>
                         <th>ID</th>
-                        <td>{{ $cliente->id }}</td>
+                        <td>{{ $pedido->id }}</td>
                     </tr>
                     <tr>
                         <th>Nome</th>
-                        <td>{{ $cliente->nome }}</td>
+                        <td>{{ $pedido->cliente->nome }}</td>
                     </tr>
                     
-                    <tr>
-                        <th>Pedidos</th>
-                        <td>
-                            @foreach($cliente->pedidos as $pedido)
-                                <p>{{ $pedido->id }} - Data: {{ $pedido->getCreatedAtFormatadoAttribute() }}</p>
-                            @endforeach
-                        </td>
-                    </tr>
+
                 </table>
             </div>
         </div>
