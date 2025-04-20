@@ -26,6 +26,7 @@
                             <th>ID</th>
                             <th>Cliente</th>
                             <th>Data</th>
+                            <th>Vincular</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -37,7 +38,8 @@
                                 <td>{{ $pedido->id }}</td>
                                 <td>{{ $pedido->cliente->nome }}</td>
                                 <td>{{ $pedido->getCreatedAtFormatadoAttribute() }}</td>
-                                
+                                <td><a href="{{ route('pedido-produto.create', ['pedido' => $pedido->id]) }}">Adicionar Produto</a></td>
+
                                 <td><a href="{{ route('pedido.show', ['pedido' => $pedido->id]) }}">Abrir</a></td>
                                 <td><a href="{{ route('pedido.edit', ['pedido' => $pedido->id]) }}">Editar</a></td>
                                 <td>

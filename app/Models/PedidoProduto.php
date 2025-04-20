@@ -8,4 +8,8 @@ class PedidoProduto extends Model
 {
     //
     protected $table = 'pedidos_produtos';
+
+    public function cliente() {
+        return $this->belongsTo(Cliente::class);
+    }
 }

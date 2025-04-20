@@ -58,7 +58,11 @@ Route::middleware('log.acesso','autenticacao')
         // aula 190
         Route::resource('cliente', ClienteController::class);
         Route::resource('pedido', PedidoController::class);
-        Route::resource('pedido-produto', PedidoProdutoController::class);
+        //Route::resource('pedido-produto', PedidoProdutoController::class);
+
+        //aula 195
+        Route::get('pedido-produto/create/{pedido}', [PedidoProdutoController::class, 'create'])->name('pedido-produto.create');
+        Route::post('pedido-produto/store/{pedido}', [PedidoProdutoController::class, 'store'])->name('pedido-produto.store');
     }
 );
 
