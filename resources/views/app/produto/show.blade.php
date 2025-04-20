@@ -41,7 +41,7 @@
                         <th>Pedidos relacionados</th>
                         <td>
                             @foreach ($produto->pedidos as $pedido)
-                                <p>ID {{ $pedido->id }} - Cliente: {{ $pedido->cliente->nome }} - Data: {{$pedido->getCreatedAtFormatadoAttribute() }} </p>
+                                <p><a href="{{ route('pedido.show', ['pedido' => $pedido->id]) }}">ID {{ $pedido->id }} </a> - Cliente: {{ $pedido->cliente->nome }} - Data: {{$pedido->getCreatedAtFormatadoAttribute() }} </p>
                                 <hr>
                             @endforeach
                         </td>
