@@ -32,6 +32,12 @@ class Produto extends Model
         return "{$this->id} - {$this->nome}";
     }
 
+    //data formatada
+    public function getCreatedAtFormatado()
+    {
+        return $this->created_at->format('d/m/Y  H:i');
+    }
+
     //aula 197 - relacionamento de produto com pedidos
     public function pedidos() {
         return $this->belongsToMany(Pedido::class, 'pedidos_produtos');
