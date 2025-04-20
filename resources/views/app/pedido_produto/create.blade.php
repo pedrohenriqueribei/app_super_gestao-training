@@ -33,6 +33,20 @@
 
                 @component('app.pedido_produto._components.form_create', ['pedido' => $pedido, 'produtos' => $produtos])
                 @endcomponent
+
+                <h4>Itens do Pedido</h4>
+                <table>
+                    <tr>
+                        <th>ID do produto</th>
+                        <th>Descrição do Produto</th>
+                    </tr>
+                    @foreach ($pedido->produtos as $produto)
+                        <tr>
+                            <td>{{ $produto->id }}</td>
+                            <td>{{ $produto->nome }}</td>
+                        </tr>
+                    @endforeach
+                </table>
             </div>
         </div>
         

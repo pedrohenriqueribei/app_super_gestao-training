@@ -29,7 +29,23 @@
                         <th>Nome</th>
                         <td>{{ $pedido->cliente->nome }}</td>
                     </tr>
-                    
+                    <tr>
+                        <th>Produtos</th>
+                        <td>
+                            <table>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Produto</th>
+                                </tr>
+                                @foreach ($pedido->produtos as $produto)
+                                    <tr>
+                                        <td>{{ $produto->id }}</td>
+                                        <td>{{ $produto->nome }}</td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </td>
+                    </tr>
 
                 </table>
             </div>

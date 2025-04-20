@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\PedidoProduto;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
@@ -28,16 +29,13 @@ class PedidoProdutoController extends Controller
         //validação
         $request->validate($this->regras(), $this->mensagens());
 
+        $pedidoProduto = new PedidoProduto();
+        $pedidoProduto->pedido_id = $pedido->id;
+        $pedidoProduto->produto_id = $request->get('produto_id');
 
-        echo '<pre>';
-        print_r($pedido);
-        echo '</pre>';
-        
-        echo '<br>';
+        $pedidoProduto->save();
 
-        echo '<pre>';
-        print_r($request->all());
-        echo '</pre>';
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido]);
 
     }
 
