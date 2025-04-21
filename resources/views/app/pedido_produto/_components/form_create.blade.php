@@ -11,7 +11,8 @@
     </select>
     <span style="color: rgb(255, 149, 0);">{{ $errors->has('produto_id') ? $errors->first('produto_id') : '' }}</span>
 
-    
+    <input type="number" name="quantidade" id="quantidade" value="{{ old('quantidade') }}" min="1" max="10">
+    <span style="color: rgb(255, 149, 0);">{{ $errors->has('quantidade') ? $errors->first('quantidade') : '' }}</span>
 
     <button type="submit" class="borda-branca">Vincular</button>
 </form>

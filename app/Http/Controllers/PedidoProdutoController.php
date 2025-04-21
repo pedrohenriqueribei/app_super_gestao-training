@@ -32,7 +32,7 @@ class PedidoProdutoController extends Controller
         $pedidoProduto = new PedidoProduto();
         $pedidoProduto->pedido_id = $pedido->id;
         $pedidoProduto->produto_id = $request->get('produto_id');
-
+        $pedidoProduto->quantidade = $request->get('quantidade');
         $pedidoProduto->save();
 
         return redirect()->route('pedido-produto.create', ['pedido' => $pedido]);
@@ -50,14 +50,16 @@ class PedidoProdutoController extends Controller
     //regras de validação
     public function regras() {
         return [
-            'produto_id' => 'exists:produtos,id'
+            'produto_id' => 'exists:produtos,id',
+            'quantidade' => 'required'
         ];
     }
 
     // mensagens de validação
     public function mensagens() {
         return [
-            'produto_id.exists' => 'Informar um produto é obrigatório'
+            'produto_id.exists' => 'Informar um produto é obrigatório',
+            'required' => 'Informe uma quantidade'
         ];
     }
 }

@@ -36,13 +36,15 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Produto</th>
+                                    <th>Quantidade</th>
                                     <th>Data</th>
                                 </tr>
                                 @foreach ($pedido->produtos as $produto)
                                     <tr>
                                         <td>{{ $produto->id }}</td>
                                         <td>{{ $produto->nome }}</td>
-                                        <td>{{ $produto->getCreatedAtFormatado() }} </td>
+                                        <td>{{ $produto->pivot->quantidade }}</td>
+                                        <td>{{ $produto->pivot->created_at->format('d/m/Y') }} </td>
                                     </tr>
                                 @endforeach
                             </table>

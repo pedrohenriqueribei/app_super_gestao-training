@@ -39,11 +39,13 @@
                     <tr>
                         <th>ID do produto</th>
                         <th>Descrição do Produto</th>
+                        <th>Quantidade</th>
                     </tr>
                     @foreach ($pedido->produtos as $produto)
                         <tr>
                             <td>{{ $produto->id }}</td>
                             <td>{{ $produto->nome }}</td>
+                            <td>{{ $produto->pivot->quantidade }}</td>
                         </tr>
                     @endforeach
                 </table>
