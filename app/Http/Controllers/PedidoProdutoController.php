@@ -29,11 +29,19 @@ class PedidoProdutoController extends Controller
         //validação
         $request->validate($this->regras(), $this->mensagens());
 
+        /*
+        //modo convencional
         $pedidoProduto = new PedidoProduto();
         $pedidoProduto->pedido_id = $pedido->id;
         $pedidoProduto->produto_id = $request->get('produto_id');
         $pedidoProduto->quantidade = $request->get('quantidade');
         $pedidoProduto->save();
+        */
+
+        //vinculando registro por meio do relacionamento 
+        $pedido->produtos()->attach($request->get('produto_id'), [
+            'quantidade' => $request->get('quantidade')
+        ]);
 
         return redirect()->route('pedido-produto.create', ['pedido' => $pedido]);
 
@@ -42,9 +50,25 @@ class PedidoProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Pedido $pedido, Produto $produto)
     {
-        //
+        //remover a vinculação de produto com pedidos
+        //convencional
+        /*
+        PedidoProduto::where([
+            'pedido_id' => $pedido->id,
+            'produto_id' => $produto->id
+        ])->delete();
+        
+        //ou
+        //$produto->pedidos()->detach($pedido->id);
+        */
+        
+        //dettach (delete pelo relacionamento)
+        $pedido->produtos()->detach($produto->id);
+
+
+        return redirect()->route('pedido.show', ['pedido' => $pedido->id]);
     }
 
     //regras de validação

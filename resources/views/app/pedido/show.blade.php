@@ -19,7 +19,7 @@
 
         <div class="informacao-pagina">
 
-            <div style="width:30%; margin-left: auto; margin-right: auto;">
+            <div style="width:40%; margin-left: auto; margin-right: auto;">
                 <table border="1">
                     <tr>
                         <th>ID</th>
@@ -38,6 +38,7 @@
                                     <th>Produto</th>
                                     <th>Quantidade</th>
                                     <th>Data</th>
+                                    <th>Excluir</th>
                                 </tr>
                                 @foreach ($pedido->produtos as $produto)
                                     <tr>
@@ -45,6 +46,13 @@
                                         <td>{{ $produto->nome }}</td>
                                         <td>{{ $produto->pivot->quantidade }}</td>
                                         <td>{{ $produto->pivot->created_at->format('d/m/Y') }} </td>
+                                        <td>
+                                            <form id="form_{{$pedido->id}}_{{$produto->id}}" method="post" action="{{ route('pedido-produto.destroy', ['pedido' => $pedido->id, 'produto' => $produto->id]) }}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <a href="#" onclick="document.getElementById('form_{{$pedido->id}}_{{$produto->id}}').submit()">X</a>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>
