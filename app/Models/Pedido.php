@@ -10,7 +10,7 @@ class Pedido extends Model
     //muitos produtos pertencem a um determinado pedido
     public function produtos() {
         //mapeamento padrão Laravel
-        return $this->belongsToMany(Produto::class, 'pedidos_produtos')->withPivot("created_at", "updated_at", "quantidade");
+        return $this->belongsToMany(Produto::class, 'pedidos_produtos')->withPivot("id","created_at", "updated_at", "quantidade");
 
         /**
          * Caso não seja o mapeamento padrão, tem que passar 4 parâmetros na função belongsToMany

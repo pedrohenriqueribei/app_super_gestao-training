@@ -63,7 +63,8 @@ Route::middleware('log.acesso','autenticacao')
         //aula 195
         Route::get('pedido-produto/create/{pedido}', [PedidoProdutoController::class, 'create'])->name('pedido-produto.create');
         Route::post('pedido-produto/store/{pedido}', [PedidoProdutoController::class, 'store'])->name('pedido-produto.store');
-        Route::delete('pedido-produto.destroy/{pedido}/{produto}', [PedidoProdutoController::class, 'destroy'])->name('pedido-produto.destroy');
+        //Route::delete('pedido-produto.destroy/{pedido}/{produto}', [PedidoProdutoController::class, 'destroy'])->name('pedido-produto.destroy');
+        Route::delete('pedido-produto.destroy/{pedidoProduto}', [PedidoProdutoController::class, 'destroy'])->name('pedido-produto.destroy');
     }
 );
 
